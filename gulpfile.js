@@ -67,6 +67,11 @@ function fonts() {
       .pipe(gulp.dest('dest/fonts'))
 }
 
+function libs() {
+   return gulp.src('src/libs/**/*')
+      .pipe(gulp.dest('dest/libs'))
+}
+
 function img() {
    return gulp
      .src(["src/img/*.jpg", "src/img/*.png"]) //Выберем наши картинки
@@ -116,6 +121,7 @@ gulp.task('styles', styles);
 gulp.task('scripts', scripts);
 //Таск для шрифтов
 gulp.task('fonts', fonts);
+gulp.task('libs', libs);
 
 gulp.task('img', img)
 //Таск для очистки папки build
@@ -123,6 +129,6 @@ gulp.task('del', clean);
 //Таск для отслеживания изменений
 gulp.task('watch', watch);
 //Таск для удаления файлов в папке build и запуск styles и scripts
-gulp.task('build', gulp.series(clean, gulp.parallel(styles,scripts,img, fonts)));
+gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts, img, libs, fonts)));
 //Таск запускает таск build и watch последовательно
 gulp.task('dev', gulp.series('build','watch'));
